@@ -21,10 +21,12 @@ public class ConnectionManager{
 	protected void addNewConnection(Connection connection){
 		connections.put(connection.getSequenceID(), connection);
 		connection.start();
+		messageQueue.addMessage("3", connection.getSequenceID());
 	}
 	protected void removeConnection(Connection connection){
 		connections.remove(connection.getSequenceID());
 		connection.interrupt();
+		messageQueue.addMessage("4", connection.getSequenceID());
 	}
 	protected void receiveMessage(String message,int clinetID){
 	    messageQueue.addMessage(message, clinetID);
