@@ -1,4 +1,4 @@
-package com.conflux.killer.server.message;
+package com.conflux.killer.core.message;
 
 public interface MessageQueue {
     void addMessage(String message,int senderId);

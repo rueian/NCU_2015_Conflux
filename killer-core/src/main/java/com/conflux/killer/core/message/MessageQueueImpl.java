@@ -1,4 +1,4 @@
-package com.conflux.killer.server.message;
+package com.conflux.killer.core.message;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
