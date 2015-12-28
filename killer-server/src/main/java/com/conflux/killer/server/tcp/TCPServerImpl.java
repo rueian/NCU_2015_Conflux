@@ -23,4 +23,9 @@ public class TCPServerImpl implements TCPServer{
     public void sendMessage(String message,int receiverId) {
         connectionManager.sendMessage(message, receiverId);
     }
+
+    @Override
+    public void sendMessage(String message) {
+        connectionManager.sendMessage(message);
+    }
 }
