@@ -16,13 +16,13 @@ public class MessageReceiverImpl implements MessageReceiver {
     @Override
     public void receiveMessage( Message message ) {
         String[] commands = message.content.split( "," );
-        if (commands[0].equals( "1" )) {
+        if ( commands[ 0 ].equals( "1" ) ) {
             dataCenter.fireAttack( message.senderId, Skill.valueOf( commands[ 1 ] ), Direction.valueOf( commands[ 2 ] ) );
-        } else if (commands[0].equals( "2" )) {
-            dataCenter.updatePosition( message.senderId, Direction.valueOf( commands[1] ) );
-        } else if (commands[0].equals( "3" )) {
+        } else if ( commands[ 0 ].equals( "2" ) ) {
+            dataCenter.updatePosition( message.senderId, Direction.valueOf( commands[ 1 ] ) );
+        } else if ( commands[ 0 ].equals( "3" ) ) {
             dataCenter.addCharacter( message.senderId );
-        } else if (commands[0].equals( "4" )) {
+        } else if ( commands[ 0 ].equals( "4" ) ) {
             dataCenter.removeCharacter( message.senderId );
         }
 
