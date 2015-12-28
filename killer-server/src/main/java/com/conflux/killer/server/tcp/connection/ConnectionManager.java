@@ -35,4 +35,9 @@ public class ConnectionManager{
 		Connection connection = connections.get(receiverId);
 		connection.sentMessage(message);
 	}
+	public void sendMessage(String message) {
+	    for(Connection connection : connections.values()){
+	        connection.sentMessage(message);
+	    }
+	}
 }
