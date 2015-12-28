@@ -15,9 +15,9 @@ public class MessageConsumerThread implements Runnable {
 
     @Override
     public void run() {
-        while(true) {
+        while ( true ) {
             Message message = queue.getMessage();
-            if (message != null) {
+            if ( message != null ) {
                 receiver.receiveMessage( message );
             } else {
                 try {

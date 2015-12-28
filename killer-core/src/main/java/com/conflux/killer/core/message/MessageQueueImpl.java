@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class MessageQueueImpl implements MessageQueue {
 
-    private Queue<Message> queue;
+    private Queue< Message > queue;
 
     public MessageQueueImpl() {
         queue = new ConcurrentLinkedQueue< Message >();
@@ -13,7 +13,7 @@ public class MessageQueueImpl implements MessageQueue {
 
     @Override
     public void addMessage( String message, int senderId ) {
-        queue.add( new Message(senderId, message) );
+        queue.add( new Message( senderId, message ) );
     }
 
     @Override
