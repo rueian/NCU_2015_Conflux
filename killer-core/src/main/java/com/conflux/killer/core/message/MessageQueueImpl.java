@@ -8,7 +8,7 @@ public class MessageQueueImpl implements MessageQueue {
     private Queue< Message > queue;
 
     public MessageQueueImpl() {
-        queue = new ConcurrentLinkedQueue< Message >();
+        queue = new ConcurrentLinkedQueue<>();
     }
 
     @Override

@@ -1,9 +1,9 @@
 package com.conflux.killer.server.message;
 
-import com.conflux.killer.core.message.Message;
+import com.conflux.killer.core.message.*;
 import com.conflux.killer.server.cdc.DataCenter;
-import com.conflux.killer.core.message.Direction;
-import com.conflux.killer.core.message.Skill;
+
+import static com.conflux.killer.core.message.CMCode.*;
 
 public class MessageReceiverImpl implements MessageReceiver {
 
@@ -16,13 +16,14 @@ public class MessageReceiverImpl implements MessageReceiver {
     @Override
     public void receiveMessage( Message message ) {
         String[] commands = message.content.split( "," );
-        if ( commands[ 0 ].equals( "1" ) ) {
+        int code = Integer.parseInt( commands[0] );
+        if ( code == ATTACK.ordinal() ) {
             dataCenter.fireAttack( message.senderId, Skill.valueOf( commands[ 1 ] ), Direction.valueOf( commands[ 2 ] ) );
-        } else if ( commands[ 0 ].equals( "2" ) ) {
+        } else if ( code == MOVE.ordinal() ) {
             dataCenter.updatePosition( message.senderId, Direction.valueOf( commands[ 1 ] ) );
-        } else if ( commands[ 0 ].equals( "3" ) ) {
+        } else if ( code == ADD_PLAYER.ordinal() ) {
             dataCenter.addCharacter( message.senderId );
-        } else if ( commands[ 0 ].equals( "4" ) ) {
+        } else if ( code == REMOVE_PLAYER.ordinal() ) {
             dataCenter.removeCharacter( message.senderId );
         }
 

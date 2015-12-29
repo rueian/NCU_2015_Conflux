@@ -1,7 +1,4 @@
-package com.conflux.killer.server.message;
-
-import com.conflux.killer.core.message.Message;
-import com.conflux.killer.core.message.MessageQueue;
+package com.conflux.killer.core.message;
 
 public class MessageConsumerThread implements Runnable {
 
@@ -18,6 +15,7 @@ public class MessageConsumerThread implements Runnable {
         while ( true ) {
             Message message = queue.getMessage();
             if ( message != null ) {
+                System.out.println( message.senderId + "||" + message.content );
                 receiver.receiveMessage( message );
             } else {
                 try {
