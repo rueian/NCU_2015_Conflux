@@ -16,13 +16,18 @@ public class Connection extends Thread {
         this.socket = socket;
         this.sequenceID = sequenceID;
         this.connectionManager = connectionManager;
+        try {
+            ois = new DataInputStream( socket.getInputStream() );
+            oos = new DataOutputStream( socket.getOutputStream() );
+        } catch ( IOException e ) {
+            e.printStackTrace();
+            offline();
+        }
     }
 
     @Override
     public void run() {
         try {
-            ois = new DataInputStream( socket.getInputStream() );
-            oos = new DataOutputStream( socket.getOutputStream() );
             while ( true ) {
                 connectionManager.receiveMessage( ois.readUTF(), sequenceID );
             }

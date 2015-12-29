@@ -8,7 +8,7 @@ public class UserInterface extends JFrame {
 
     public UserInterface( KeyListener keyListener ) throws HeadlessException {
         this.setSize( 400, 400 );
-        this.getContentPane().addKeyListener( keyListener );
+        this.addKeyListener( keyListener );
         this.setVisible( true );
     }
 }
