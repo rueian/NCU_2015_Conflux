@@ -23,7 +23,7 @@ public class Main {
         MessageQueue messageQueue = new MessageQueueImpl();
         Connector connector = new Connector( messageQueue );
         TCPClient client = new TCPClientImpl( connector );
-        client.connectionServer( "127.0.0.1", 8765 );
+
 
         ObjectCenter objectCenter = new ObjectCenterImpl();
 
@@ -31,12 +31,10 @@ public class Main {
 
         MessageReceiver messageReceiver = new MessageReceiverImpl( objectCenter );
 
-        MessageConsumerThread consumerThread = new MessageConsumerThread( messageQueue, messageReceiver );
+        Runnable consumerThread = new MessageConsumerThread( messageQueue, messageReceiver );
 
         KeyListener keyListener = new GameKeyListener( messageSender, objectCenter );
 
-        new Thread( consumerThread ).start();
-
-        UserInterface userInterface = new UserInterface( keyListener );
+        UserInterface userInterface = new UserInterface( keyListener, consumerThread, client );
     }
 }
