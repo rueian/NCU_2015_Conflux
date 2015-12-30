@@ -27,7 +27,6 @@ public class UserInterface extends JFrame implements GameControlable {
     private TCPClient client;
     private Connector connector;
     private MessageQueue messageQueue;
-    private final JPanel panel;
 
     public UserInterface() throws HeadlessException {
 
@@ -37,6 +36,29 @@ public class UserInterface extends JFrame implements GameControlable {
         this.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
         this.addKeyListener( keyListener );
 
+        showUI();
+
+        this.setVisible( true );
+    }
+
+    public void init() {
+        messageQueue = new MessageQueueImpl();
+        connector = new Connector(messageQueue);
+        client = new TCPClientImpl(connector);
+
+        objectCenter = new ObjectCenterImpl(this);
+
+        messageSender = new MessageSenderImpl(client);
+
+        messageReceiver = new MessageReceiverImpl(objectCenter);
+
+        consumerThread = new MessageConsumerThread(messageQueue, messageReceiver);
+
+        keyListener = new GameKeyListener(messageSender, objectCenter);
+    }
+
+    @Override
+    public void showUI() {
         JLabel label = new JLabel( "The Killer" );
         label.setFont( new Font( "Arial", Font.BOLD, 50 ) );
         label.setBounds( 200, 50, 300, 60 );
@@ -63,7 +85,8 @@ public class UserInterface extends JFrame implements GameControlable {
         helpBtn.setBounds( 180, 320, 300, 60 );
         helpBtn.addActionListener( (e)-> JOptionPane.showMessageDialog( this, helpMessage ));
 
-        panel = new JPanel();
+        JPanel panel = new JPanel();
+        panel.setSize(660, 660);
         panel.setLayout(null);
         panel.add(label);
         panel.add(helpBtn);
@@ -71,23 +94,6 @@ public class UserInterface extends JFrame implements GameControlable {
         panel.add(connectButton);
 
         this.setContentPane(panel);
-        this.setVisible( true );
-    }
-
-    public void init() {
-        messageQueue = new MessageQueueImpl();
-        connector = new Connector(messageQueue);
-        client = new TCPClientImpl(connector);
-
-        objectCenter = new ObjectCenterImpl(this);
-
-        messageSender = new MessageSenderImpl(client);
-
-        messageReceiver = new MessageReceiverImpl(objectCenter);
-
-        consumerThread = new MessageConsumerThread(messageQueue, messageReceiver);
-
-        keyListener = new GameKeyListener(messageSender, objectCenter);
     }
 
     @Override
@@ -103,16 +109,48 @@ public class UserInterface extends JFrame implements GameControlable {
 
     @Override
     public void endGame() {
-
+        JPanel drawPanel = new JPanel();
+        drawPanel.setSize(660, 660);
+        JLabel label = new JLabel( "你死了" );
+        label.setFont( new Font( "Arial", Font.BOLD, 20 ) );
+        label.setBounds( 200, 50, 300, 60 );
+        JButton backBtn = new JButton( "返回" );
+        backBtn.setFont(new Font("Arial", Font.BOLD, 25));
+        backBtn.setBounds(180, 400, 300, 60);
+        backBtn.addActionListener((e) -> {
+            this.showUI();
+        });
+        drawPanel.add(label);
+        drawPanel.add(backBtn);
+        this.setContentPane(drawPanel);
     }
 
     @Override
     public void updateCharacterNum( int num ) {
-
+        JPanel drawPanel = new JPanel();
+        drawPanel.setSize(660, 660);
+        JLabel label = new JLabel( "已經有 " + num + " 位玩家加入" );
+        label.setFont( new Font( "Arial", Font.BOLD, 20 ) );
+        label.setBounds( 200, 50, 300, 60 );
+        drawPanel.add(label);
+        this.setContentPane(drawPanel);
     }
 
     @Override
     public void winGame() {
-
+        JPanel drawPanel = new JPanel();
+        drawPanel.setSize(660, 660);
+        JLabel label = new JLabel( "恭喜你活到了最後" );
+        label.setFont( new Font( "Arial", Font.BOLD, 20 ) );
+        label.setBounds( 200, 50, 300, 60 );
+        JButton backBtn = new JButton( "返回" );
+        backBtn.setFont(new Font("Arial", Font.BOLD, 25));
+        backBtn.setBounds(180, 400, 300, 60);
+        backBtn.addActionListener((e) -> {
+            this.showUI();
+        });
+        drawPanel.add(label);
+        drawPanel.add(backBtn);
+        this.setContentPane(drawPanel);
     }
 }
