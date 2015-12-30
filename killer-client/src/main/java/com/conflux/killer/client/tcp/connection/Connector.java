@@ -52,6 +52,6 @@ public class Connector extends Thread {
     }
 
     private void offline() {
-        System.out.println( "Having trouble connecting to server" );
+        messageQueue.addMessage( "7", 0 );
     }
 }
