@@ -8,7 +8,7 @@ import java.awt.event.KeyListener;
 
 public class UserInterface extends JFrame {
 
-    public UserInterface( KeyListener keyListener, Runnable runnable, final TCPClient client ) throws HeadlessException {
+    public UserInterface( KeyListener keyListener, Runnable consumeThread, final TCPClient client ) throws HeadlessException {
         this.setSize( 660, 660 );
         this.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
         this.addKeyListener( keyListener );
@@ -26,7 +26,7 @@ public class UserInterface extends JFrame {
         button.setBounds( 180, 400, 300, 60 );
         button.addActionListener( (e)-> {
                 client.connectionServer( textField.getText(), 8765 );
-                new Thread( runnable ).start();
+                new Thread( consumeThread ).start();
         });
 
         String helpMessage = "這是一個關於猜疑與生存的遊戲，生存為玩家的第一要務。為了生存，" +
