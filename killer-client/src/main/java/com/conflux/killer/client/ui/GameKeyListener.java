@@ -22,6 +22,10 @@ public class GameKeyListener extends KeyAdapter {
 
     @Override
     public void keyPressed( KeyEvent e ) {
+        if ( objectCenter.isStarted() ) {
+            return ;
+        }
+
         switch ( e.getKeyCode() ){
             case VK_UP:
                 messageSender.updatePosition( Direction.UP );

@@ -22,6 +22,8 @@ public interface ObjectCenter {
 
     void setCurrentPlayerNumbers( int numbers );
 
+    boolean isStarted();
+
     Character getMe();
 
     Map< Integer, Character > getAllCharacters();

@@ -69,6 +69,11 @@ public class ObjectCenterImpl implements ObjectCenter {
     }
 
     @Override
+    public boolean isStarted() {
+        return currentPlayerNumbers == 4;
+    }
+
+    @Override
     public Character getMe() {
         return characters.get( clientId );
     }
