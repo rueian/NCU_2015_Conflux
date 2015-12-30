@@ -1,6 +1,7 @@
 package com.conflux.killer.client.message;
 
 import com.conflux.killer.client.dom.ObjectCenter;
+import com.conflux.killer.client.ui.GameControlable;
 import com.conflux.killer.core.message.*;
 
 import java.awt.*;
@@ -12,9 +13,11 @@ import static com.conflux.killer.core.message.SMCode.*;
 public class MessageReceiverImpl implements MessageReceiver {
 
     private ObjectCenter objectCenter;
+    private GameControlable gameStartable;
 
-    public MessageReceiverImpl( ObjectCenter objectCenter ) {
+    public MessageReceiverImpl(ObjectCenter objectCenter, GameControlable gameStartable) {
         this.objectCenter = objectCenter;
+        this.gameStartable = gameStartable;
     }
 
     @Override
@@ -62,6 +65,7 @@ public class MessageReceiverImpl implements MessageReceiver {
                 characters.put( id, new Point( x, y ) );
             }
             objectCenter.gameStartAndInitAll( characters );
+            gameStartable.startGame();
             return;
 
         }

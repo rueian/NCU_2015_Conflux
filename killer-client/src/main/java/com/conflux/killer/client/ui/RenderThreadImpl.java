@@ -11,6 +11,15 @@ public class RenderThreadImpl implements RenderThread {
 
     @Override
     public void startRenderThread() {
-        new Thread(sceneRender::renderScene);
+        new Thread(() -> {
+            while(true) {
+                sceneRender.renderScene();
+                try {
+                    Thread.sleep(1000/60);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 }

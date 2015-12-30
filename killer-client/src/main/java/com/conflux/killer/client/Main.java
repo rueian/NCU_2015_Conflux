@@ -20,21 +20,6 @@ import java.awt.event.KeyListener;
 public class Main {
 
     public static void main( String[] args ) {
-        MessageQueue messageQueue = new MessageQueueImpl();
-        Connector connector = new Connector( messageQueue );
-        TCPClient client = new TCPClientImpl( connector );
-
-
-        ObjectCenter objectCenter = new ObjectCenterImpl();
-
-        MessageSender messageSender = new MessageSenderImpl( client );
-
-        MessageReceiver messageReceiver = new MessageReceiverImpl( objectCenter );
-
-        Runnable consumerThread = new MessageConsumerThread( messageQueue, messageReceiver );
-
-        KeyListener keyListener = new GameKeyListener( messageSender, objectCenter );
-
-        UserInterface userInterface = new UserInterface( keyListener, consumerThread, client );
+        UserInterface userInterface = new UserInterface();
     }
 }
