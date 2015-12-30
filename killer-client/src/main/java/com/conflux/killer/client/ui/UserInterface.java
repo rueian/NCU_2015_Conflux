@@ -30,6 +30,9 @@ public class UserInterface extends JFrame implements GameControlable {
     private final JPanel panel;
 
     public UserInterface() throws HeadlessException {
+
+        init();
+
         this.setSize( 660, 660 );
         this.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
         this.addKeyListener( keyListener );
@@ -68,9 +71,6 @@ public class UserInterface extends JFrame implements GameControlable {
         panel.add(connectButton);
 
         this.setContentPane(panel);
-
-        init();
-
         this.setVisible( true );
     }
 
@@ -92,11 +92,12 @@ public class UserInterface extends JFrame implements GameControlable {
 
     @Override
     public void startGame() {
-//        JPanel drawPanel = new JPanel();
-//        this.setContentPane(drawPanel);
+        JPanel drawPanel = new JPanel();
+        drawPanel.setSize(660, 660);
+        this.setContentPane(drawPanel);
         SceneDataImpl sceneData = new SceneDataImpl();
         sceneData.loadMap();
-        new RenderThreadImpl(new SceneRenderImpl(sceneData, objectCenter, panel.getGraphics())).startRenderThread();
+        new RenderThreadImpl(new SceneRenderImpl(sceneData, objectCenter, drawPanel.getGraphics())).startRenderThread();
     }
 
     @Override

@@ -42,7 +42,7 @@ public class SceneRenderImpl implements SceneRender {
                     } else {
                         offGraphics.setColor(Color.WHITE);
                     }
-                    offGraphics.drawRect( i * 60, j * 60, 60, 60 );
+                    offGraphics.fillRect( i * 60, j * 60, 60, 60 );
                 }
             }
         }
