@@ -47,4 +47,16 @@ public class ConnectionManager {
             connection.sentMessage( message );
         }
     }
+
+    public void removeAll() {
+        try {
+            for ( Connection connection : connections.values() ) {
+                connection.interrupt();
+            }
+            connections = null;
+            connectionReception.interrupt();
+        } catch (Exception e) {
+
+        }
+    }
 }

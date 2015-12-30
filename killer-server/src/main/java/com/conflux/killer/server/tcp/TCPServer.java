@@ -6,4 +6,6 @@ public interface TCPServer {
     void sendMessage( String message, int receiverId );
 
     void sendMessage( String message );
+
+    void removeAll();
 }

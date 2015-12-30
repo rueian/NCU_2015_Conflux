@@ -7,6 +7,8 @@ import com.conflux.killer.server.message.MessageSender;
 import java.awt.*;
 import java.util.*;
 
+import static com.conflux.killer.server.Main.*;
+
 public class DataCenterImpl implements DataCenter {
 
     private MessageSender sender;
@@ -92,5 +94,9 @@ public class DataCenterImpl implements DataCenter {
     public void removeCharacter( int clientId ) {
         characters.remove( clientId );
         sender.removeCharacter( clientId );
+
+        if (characters.size() == 0) {
+            isGaming = false;
+        }
     }
 }

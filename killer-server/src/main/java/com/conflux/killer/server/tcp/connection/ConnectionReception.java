@@ -18,12 +18,23 @@ public class ConnectionReception extends Thread {
     public void run() {
         try {
             this.server = new ServerSocket( SERVER_PORT );
-            while ( true ) {
+            for ( int i = 0; i < 4; i ++ ) {
                 Socket socket = server.accept();
                 Connection newConnection = establishConnection( socket );
                 connectionManager.addNewConnection( newConnection );
             }
+            this.server.close();
         } catch ( IOException e ) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void interrupt() {
+        super.interrupt();
+        try {
+            this.server.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

@@ -46,6 +46,16 @@ public class Connection extends Thread {
         }
     }
 
+    @Override
+    public void interrupt() {
+        super.interrupt();
+        try {
+            socket.close();
+        } catch (IOException e) {
+
+        }
+    }
+
     private void offline() {
         connectionManager.removeConnection( this );
     }
