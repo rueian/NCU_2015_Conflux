@@ -22,7 +22,7 @@ public class GameKeyListener extends KeyAdapter {
 
     @Override
     public void keyPressed( KeyEvent e ) {
-        if ( objectCenter.isStarted() ) {
+        if ( ! objectCenter.isStarted() ) {
             return ;
         }
 
