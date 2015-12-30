@@ -95,6 +95,7 @@ public class UserInterface extends JFrame implements GameControlable {
         JPanel drawPanel = new JPanel();
         drawPanel.setSize(660, 660);
         this.setContentPane(drawPanel);
+        this.requestFocus();
         SceneDataImpl sceneData = new SceneDataImpl();
         sceneData.loadMap();
         new RenderThreadImpl(new SceneRenderImpl(sceneData, objectCenter, drawPanel.getGraphics())).startRenderThread();
