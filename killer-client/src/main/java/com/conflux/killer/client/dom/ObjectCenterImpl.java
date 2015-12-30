@@ -70,7 +70,7 @@ public class ObjectCenterImpl implements ObjectCenter {
 
     @Override
     public boolean isStarted() {
-        return currentPlayerNumbers == 4;
+        return characters.size() == 4;
     }
 
     @Override

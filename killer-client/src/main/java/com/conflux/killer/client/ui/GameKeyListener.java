@@ -42,10 +42,10 @@ public class GameKeyListener extends KeyAdapter {
             case VK_Q:
                 messageSender.fireAttack( Skill.Q, objectCenter.getMe().direction );
                 break;
-            case 87:
+            case VK_W:
                 messageSender.fireAttack( Skill.W, objectCenter.getMe().direction );
                 break;
-            case 69:
+            case VK_E:
                 messageSender.fireAttack( Skill.E, objectCenter.getMe().direction );
                 break;
         }

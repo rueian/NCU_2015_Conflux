@@ -54,7 +54,7 @@ public class MessageReceiverImpl implements MessageReceiver {
 
         if ( type == START.ordinal() ) {
             Map< Integer, Point > characters = new HashMap<>();
-            for ( int i = 1; i < commands.length - 1; i++ ) {
+            for ( int i = 1; i < commands.length; i++ ) {
                 String[] info = commands[ i ].split( ":" );
                 int id = Integer.parseInt( info[ 0 ] );
                 int x = Integer.parseInt( info[ 1 ] );
