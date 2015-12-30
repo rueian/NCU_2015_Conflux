@@ -79,11 +79,11 @@ public class UserInterface extends JFrame implements GameControlable {
         connector = new Connector(messageQueue);
         client = new TCPClientImpl(connector);
 
-        objectCenter = new ObjectCenterImpl();
+        objectCenter = new ObjectCenterImpl(this);
 
         messageSender = new MessageSenderImpl(client);
 
-        messageReceiver = new MessageReceiverImpl(objectCenter, this);
+        messageReceiver = new MessageReceiverImpl(objectCenter);
 
         consumerThread = new MessageConsumerThread(messageQueue, messageReceiver);
 
@@ -107,7 +107,12 @@ public class UserInterface extends JFrame implements GameControlable {
     }
 
     @Override
-    public void updateCharacterNum() {
+    public void updateCharacterNum( int num ) {
+
+    }
+
+    @Override
+    public void winGame() {
 
     }
 }

@@ -1,5 +1,6 @@
 package com.conflux.killer.client.dom;
 
+import com.conflux.killer.client.ui.GameControlable;
 import com.conflux.killer.core.message.Direction;
 import com.conflux.killer.core.message.Skill;
 
@@ -15,13 +16,18 @@ public class ObjectCenterImpl implements ObjectCenter {
 
     public int currentPlayerNumbers = 0;
 
+    public boolean isStarted = false;
+
     private Map< Integer, Character > characters;
 
     private List< Attack > attacks;
 
-    public ObjectCenterImpl() {
+    private GameControlable gameStartable;
+
+    public ObjectCenterImpl(GameControlable gameStartable) {
         characters = new HashMap<>();
         attacks = new ArrayList<>();
+        this.gameStartable = gameStartable;
     }
 
     @Override
@@ -47,6 +53,11 @@ public class ObjectCenterImpl implements ObjectCenter {
     @Override
     public void removeCharacterId( int clientId ) {
         characters.remove( clientId );
+        if (clientId == this.clientId) {
+            gameStartable.endGame();
+        } else if (characters.size() == 1) {
+            gameStartable.winGame();
+        }
     }
 
     @Override
@@ -54,8 +65,8 @@ public class ObjectCenterImpl implements ObjectCenter {
         for ( Map.Entry< Integer, Point > pair : characters.entrySet() ) {
             this.characters.put( pair.getKey(), new Character( pair.getKey(), pair.getValue() ) );
         }
-
-        // TODO how to notify render engine?
+        isStarted = true;
+        gameStartable.startGame();
     }
 
     @Override
@@ -66,11 +77,12 @@ public class ObjectCenterImpl implements ObjectCenter {
     @Override
     public void setCurrentPlayerNumbers( int numbers ) {
         this.currentPlayerNumbers = numbers;
+        gameStartable.updateCharacterNum( numbers );
     }
 
     @Override
     public boolean isStarted() {
-        return characters.size() == 4;
+        return isStarted;
     }
 
     @Override

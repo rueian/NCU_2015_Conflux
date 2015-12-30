@@ -33,7 +33,6 @@ public class SceneRenderImpl implements SceneRender {
         int maxI = i + 5;
         int maxJ = j + 5;
 
-
         for (j = minJ; j < maxJ; j ++) {
             for(i = minI; i < maxI; i ++) {
                 if (i >= 0 && i < map.length && j >= 0 && j < map[i].length){
