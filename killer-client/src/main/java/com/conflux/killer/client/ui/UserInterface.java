@@ -20,41 +20,19 @@ import java.awt.event.KeyListener;
 public class UserInterface extends JFrame implements GameControlable {
 
     private MessageReceiver messageReceiver;
-    private Runnable consumerThread;
     private KeyListener keyListener;
     private MessageSender messageSender;
     private ObjectCenter objectCenter;
-    private TCPClient client;
-    private Connector connector;
-    private MessageQueue messageQueue;
+    private RenderThreadImpl renderThread;
 
     public UserInterface() throws HeadlessException {
 
-        init();
-
         this.setSize( 660, 660 );
         this.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
-        this.addKeyListener( keyListener );
 
         showUI();
 
         this.setVisible( true );
-    }
-
-    public void init() {
-        messageQueue = new MessageQueueImpl();
-        connector = new Connector(messageQueue);
-        client = new TCPClientImpl(connector);
-
-        objectCenter = new ObjectCenterImpl(this);
-
-        messageSender = new MessageSenderImpl(client);
-
-        messageReceiver = new MessageReceiverImpl(objectCenter);
-
-        consumerThread = new MessageConsumerThread(messageQueue, messageReceiver);
-
-        keyListener = new GameKeyListener(messageSender, objectCenter);
     }
 
     @Override
@@ -71,6 +49,26 @@ public class UserInterface extends JFrame implements GameControlable {
         connectButton.setFont(new Font("Arial", Font.BOLD, 25));
         connectButton.setBounds(180, 400, 300, 60);
         connectButton.addActionListener((e) -> {
+
+            MessageQueue messageQueue = new MessageQueueImpl();
+            Connector connector = new Connector(messageQueue);
+            TCPClient client = new TCPClientImpl(connector);
+
+            objectCenter = new ObjectCenterImpl(this);
+
+            messageSender = new MessageSenderImpl(client);
+
+            messageReceiver = new MessageReceiverImpl(objectCenter);
+
+            Runnable consumerThread = new MessageConsumerThread(messageQueue, messageReceiver);
+
+            if (keyListener != null) {
+                this.removeKeyListener(keyListener);
+            }
+
+            keyListener = new GameKeyListener(messageSender, objectCenter);
+            this.addKeyListener(keyListener);
+
             client.connectionServer(textField.getText(), 8765);
             new Thread(consumerThread).start();
             connectButton.setEnabled(false);
@@ -104,11 +102,13 @@ public class UserInterface extends JFrame implements GameControlable {
         this.requestFocus();
         SceneDataImpl sceneData = new SceneDataImpl();
         sceneData.loadMap();
-        new RenderThreadImpl(new SceneRenderImpl(sceneData, objectCenter, drawPanel.getGraphics())).startRenderThread();
+        renderThread = new RenderThreadImpl(new SceneRenderImpl(sceneData, objectCenter, drawPanel.getGraphics()));
+        renderThread.startRenderThread();
     }
 
     @Override
     public void endGame() {
+        renderThread.stopRenderThread();
         JPanel drawPanel = new JPanel();
         drawPanel.setSize(660, 660);
         JLabel label = new JLabel( "你死了" );
@@ -138,6 +138,7 @@ public class UserInterface extends JFrame implements GameControlable {
 
     @Override
     public void winGame() {
+        renderThread.stopRenderThread();
         JPanel drawPanel = new JPanel();
         drawPanel.setSize(660, 660);
         JLabel label = new JLabel( "恭喜你活到了最後" );

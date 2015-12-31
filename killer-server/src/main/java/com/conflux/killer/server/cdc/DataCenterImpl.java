@@ -18,12 +18,12 @@ public class DataCenterImpl implements DataCenter {
 
     public DataCenterImpl( MessageSender sender ) {
         this.sender = sender;
-        this.characters = new HashMap< Integer, Point >();
-        this.initialPoints = new LinkedList< Point >();
+        this.characters = new HashMap<>();
+        this.initialPoints = new LinkedList<>();
         this.initialPoints.addAll( Arrays.asList(
                 new Point( 0, 0 ), new Point( 0, 100 ), new Point( 100, 0 ), new Point( 100, 100 )
         ) );
-        this.blocks = new HashSet< Point >();
+        this.blocks = new HashSet<>();
         this.blocks.addAll( Arrays.asList(
                 new Point( 10, 10 ), new Point( 20, 20 )
         ) );
@@ -95,7 +95,7 @@ public class DataCenterImpl implements DataCenter {
         characters.remove( clientId );
         sender.removeCharacter( clientId );
 
-        if (characters.size() == 0) {
+        if (characters.size() == 1) {
             isGaming = false;
         }
     }

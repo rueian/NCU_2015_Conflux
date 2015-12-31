@@ -3,6 +3,7 @@ package com.conflux.killer.client.ui;
 public class RenderThreadImpl implements RenderThread {
 
     private SceneRender sceneRender;
+    private Thread thread;
 
     public RenderThreadImpl(SceneRender sceneRender) {
         this.sceneRender = sceneRender;
@@ -11,15 +12,21 @@ public class RenderThreadImpl implements RenderThread {
 
     @Override
     public void startRenderThread() {
-        new Thread(() -> {
-            while(true) {
+        thread = new Thread(() -> {
+            while (true) {
                 sceneRender.renderScene();
                 try {
-                    Thread.sleep(1000/60);
+                    Thread.sleep(1000 / 60);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    break;
                 }
             }
-        }).start();
+        });
+        thread.start();
+    }
+
+    @Override
+    public void stopRenderThread() {
+        thread.interrupt();
     }
 }
