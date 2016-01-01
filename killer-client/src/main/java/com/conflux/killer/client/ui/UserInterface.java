@@ -109,6 +109,11 @@ public class UserInterface extends JFrame implements GameControlable {
     @Override
     public void endGame() {
         renderThread.stopRenderThread();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         JPanel drawPanel = new JPanel();
         drawPanel.setSize(660, 660);
         JLabel label = new JLabel( "你死了" );
@@ -139,6 +144,11 @@ public class UserInterface extends JFrame implements GameControlable {
     @Override
     public void winGame() {
         renderThread.stopRenderThread();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         JPanel drawPanel = new JPanel();
         drawPanel.setSize(660, 660);
         JLabel label = new JLabel( "恭喜你活到了最後" );

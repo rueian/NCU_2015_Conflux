@@ -55,7 +55,7 @@ public class ObjectCenterImpl implements ObjectCenter {
         characters.remove( clientId );
         if (clientId == this.clientId) {
             gameStartable.endGame();
-        } else if (characters.size() == 1) {
+        } else if (characters.size() == 1 && characters.get(this.clientId) != null) {
             gameStartable.winGame();
         }
     }
