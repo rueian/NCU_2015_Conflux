@@ -18,7 +18,7 @@ public class ConnectionReception extends Thread {
     public void run() {
         try {
             this.server = new ServerSocket( SERVER_PORT );
-            for ( int i = 0; i < 4; i ++ ) {
+            while ( connectionManager.connections.size() < 4 ) {
                 Socket socket = server.accept();
                 Connection newConnection = establishConnection( socket );
                 connectionManager.addNewConnection( newConnection );

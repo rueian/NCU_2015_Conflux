@@ -7,7 +7,7 @@ import java.util.Map;
 import com.conflux.killer.core.message.MessageQueue;
 
 public class ConnectionManager {
-    private Map< Integer, Connection > connections;
+    public Map< Integer, Connection > connections;
     private ConnectionReception connectionReception;
     private MessageQueue messageQueue;
 

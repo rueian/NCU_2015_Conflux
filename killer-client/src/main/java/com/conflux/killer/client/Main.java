@@ -1,5 +1,6 @@
 package com.conflux.killer.client;
 
+import com.conflux.killer.client.dom.Images;
 import com.conflux.killer.client.dom.ObjectCenter;
 import com.conflux.killer.client.dom.ObjectCenterImpl;
 import com.conflux.killer.client.message.MessageReceiverImpl;
@@ -20,6 +21,7 @@ import java.awt.event.KeyListener;
 public class Main {
 
     public static void main( String[] args ) {
+        Images.load();
         UserInterface userInterface = new UserInterface();
     }
 }

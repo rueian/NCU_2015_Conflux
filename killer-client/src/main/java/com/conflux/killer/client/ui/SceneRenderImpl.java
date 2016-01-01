@@ -8,19 +8,14 @@ import java.awt.image.BufferedImage;
 public class SceneRenderImpl implements SceneRender {
     private SceneData sceneData;
     private ObjectCenter objectCenter;
-    private Graphics g;
 
-    public SceneRenderImpl(SceneData sceneData, ObjectCenter objectCenter, Graphics g) {
+    public SceneRenderImpl(SceneData sceneData, ObjectCenter objectCenter) {
         this.sceneData = sceneData;
         this.objectCenter = objectCenter;
-        this.g = g;
     }
 
     @Override
-    public void renderScene() {
-        Image offScreen = new BufferedImage(660, 660, BufferedImage.TYPE_3BYTE_BGR);
-        Graphics offGraphics = offScreen.getGraphics();
-
+    public void renderScene(Graphics g) {
         Point p = objectCenter.getMe().position;
 
         int[][] map = sceneData.getView();
@@ -37,15 +32,13 @@ public class SceneRenderImpl implements SceneRender {
             for(i = minI; i < maxI; i ++) {
                 if (i >= 0 && i < map.length && j >= 0 && j < map[i].length){
                     if (map[i][j] == 1) {
-                        offGraphics.setColor(Color.BLACK);
+                        g.setColor(Color.BLACK);
                     } else {
-                        offGraphics.setColor(Color.WHITE);
+                        g.setColor(Color.WHITE);
                     }
-                    offGraphics.fillRect( (i - minI) * 60, (j - minJ)  * 60, 60, 60 );
+                    g.fillRect( (i - minI) * 60, (j - minJ)  * 60, 60, 60 );
                 }
             }
         }
-
-        g.drawImage(offScreen, 0, 0, null);
     }
 }

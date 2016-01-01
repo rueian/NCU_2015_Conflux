@@ -102,7 +102,11 @@ public class UserInterface extends JFrame implements GameControlable {
         this.requestFocus();
         SceneDataImpl sceneData = new SceneDataImpl();
         sceneData.loadMap();
-        renderThread = new RenderThreadImpl(new SceneRenderImpl(sceneData, objectCenter, drawPanel.getGraphics()));
+        renderThread = new RenderThreadImpl(
+                new SceneRenderImpl(sceneData, objectCenter),
+                new SpriteRenderImpl(objectCenter),
+                drawPanel.getGraphics()
+        );
         renderThread.startRenderThread();
     }
 
