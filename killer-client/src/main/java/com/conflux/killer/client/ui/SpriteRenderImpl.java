@@ -8,6 +8,8 @@ import com.conflux.killer.core.message.Skill;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,13 +35,21 @@ public class SpriteRenderImpl implements SpriteRender {
             s.update();
             s.draw(g);
         }
+        List<Attack> deadAttacks = new ArrayList<>();
         for (Attack a : objectCenter.getAllAttacks()) {
+            a.updateCounter();
             Sprite s = a.sprite;
             int xx = a.position.x - m.position.x + 5;
             int yy = a.position.y - m.position.y + 5;
             s.setPosition(new Point(xx * 60, yy * 60));
             s.update();
             s.draw(g);
+            if (a.counter > 72) {
+                deadAttacks.add(a);
+            }
+        }
+        for (Attack a : deadAttacks) {
+            objectCenter.getAllAttacks().remove(a);
         }
     }
 }

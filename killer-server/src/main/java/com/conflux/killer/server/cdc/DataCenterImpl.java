@@ -21,7 +21,7 @@ public class DataCenterImpl implements DataCenter {
         this.characters = new HashMap<>();
         this.initialPoints = new LinkedList<>();
         this.initialPoints.addAll( Arrays.asList(
-                new Point( 0, 0 ), new Point( 0, 100 ), new Point( 100, 0 ), new Point( 100, 100 )
+                new Point( 1, 1 ), new Point( 1, 100 ), new Point( 100, 1 ), new Point( 100, 100 )
         ) );
         this.blocks = new HashSet<>();
         this.blocks.addAll( Arrays.asList(
@@ -47,11 +47,11 @@ public class DataCenterImpl implements DataCenter {
         int newX = p.x + direction.getX();
         int newY = p.y + direction.getY();
 
-        if ( blocks.contains( new Point( newX, newY ) ) ) {
+        if ( blocks.contains( new Point( newX - 1, newY - 1 ) ) ) {
             return;
         }
 
-        if ( newX >= 0 && newX <= 100 && newY >= 0 && newY <= 100 ) {
+        if ( newX > 0 && newX <= 100 && newY > 0 && newY <= 100 ) {
             p.x = newX;
             p.y = newY;
 

@@ -12,11 +12,17 @@ public class Attack {
     public Direction direction;
     public Sprite sprite;
 
+    public int counter = 0;
+
     public Attack( Skill type, Point position, Direction direction ) {
         this.type = type;
         this.position = position;
         this.direction = direction;
         this.sprite = new Sprite(null, Images.attacks.get(type), 0, 1, 5, new Point(0, 0), new Point(0, 0), 1, Sprite.BA_DIE);
+    }
+
+    public void updateCounter() {
+        counter ++;
     }
 }
 
