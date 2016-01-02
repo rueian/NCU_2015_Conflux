@@ -31,7 +31,10 @@ public class SceneRenderImpl implements SceneRender {
         for (j = minJ; j < maxJ; j ++) {
             for(i = minI; i < maxI; i ++) {
                 if (i >= 0 && i < map.length && j >= 0 && j < map[i].length){
-                    g.drawImage(Images.background.get(map[i][j]), (i - minI) * 60, (j - minJ)  * 60, null);
+                    g.drawImage(Images.background.get(0), (i - minI) * 60, (j - minJ)  * 60, null);
+                    if (map[i][j] == 1) {
+                        g.drawImage(Images.background.get(1), (i - minI) * 60, (j - minJ)  * 60, null);
+                    }
                 }
             }
         }
