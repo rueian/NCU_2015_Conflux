@@ -15,7 +15,7 @@ public class MessageConsumerThread implements Runnable {
         while ( true ) {
             Message message = queue.getMessage();
             if ( message != null ) {
-                System.out.println( message.senderId + "||" + message.content );
+//                System.out.println( message.senderId + "||" + message.content );
                 receiver.receiveMessage( message );
             } else {
                 try {

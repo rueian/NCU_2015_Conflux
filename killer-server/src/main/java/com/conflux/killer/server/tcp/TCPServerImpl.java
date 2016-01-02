@@ -15,7 +15,7 @@ public class TCPServerImpl implements TCPServer {
         try {
             connectionManager.listen();
         } catch ( IOException e ) {
-            System.out.println( "server shut down" );
+//            System.out.println( "server shut down" );
         }
     }
 
