@@ -1,5 +1,6 @@
 package com.conflux.killer.client.dom;
 
+import com.conflux.killer.client.ui.Images;
 import com.conflux.killer.client.ui.Sprite;
 import com.conflux.killer.core.message.Direction;
 import com.conflux.killer.core.message.Skill;

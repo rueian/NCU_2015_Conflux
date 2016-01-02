@@ -31,12 +31,7 @@ public class SceneRenderImpl implements SceneRender {
         for (j = minJ; j < maxJ; j ++) {
             for(i = minI; i < maxI; i ++) {
                 if (i >= 0 && i < map.length && j >= 0 && j < map[i].length){
-                    if (map[i][j] == 1) {
-                        g.setColor(Color.BLACK);
-                    } else {
-                        g.setColor(Color.WHITE);
-                    }
-                    g.fillRect( (i - minI) * 60, (j - minJ)  * 60, 60, 60 );
+                    g.drawImage(Images.background.get(map[i][j]), (i - minI) * 60, (j - minJ)  * 60, null);
                 }
             }
         }

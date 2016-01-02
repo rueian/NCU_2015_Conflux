@@ -2,9 +2,7 @@ package com.conflux.killer.client.ui;
 
 import com.conflux.killer.client.dom.Attack;
 import com.conflux.killer.client.dom.Character;
-import com.conflux.killer.client.dom.Images;
 import com.conflux.killer.client.dom.ObjectCenter;
-import com.conflux.killer.core.message.Skill;
 
 import java.awt.Graphics;
 import java.awt.Point;

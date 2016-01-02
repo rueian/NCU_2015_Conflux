@@ -1,4 +1,4 @@
-package com.conflux.killer.client.dom;
+package com.conflux.killer.client.ui;
 
 import com.conflux.killer.core.message.Direction;
 import com.conflux.killer.core.message.Skill;
@@ -8,6 +8,7 @@ import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,9 +21,12 @@ public class Images {
 
     public static Map<Skill, Image[]> attacks;
 
+    public static Map<Integer, Image> background;
+
     public static void load() {
         characters = new HashMap<>();
         attacks = new HashMap<>();
+        background = new HashMap<>();
 
         for(int i = 0; i < 4; i ++) {
             characters.put(i, new HashMap<>());
@@ -44,6 +48,13 @@ public class Images {
         readGif(attacks.get(Skill.E), "attacks/0/fire1.gif");
         readGif(attacks.get(Skill.Q), "attacks/1/fire2.gif");
         readGif(attacks.get(Skill.W), "attacks/2/fire3.gif");
+
+        try {
+            background.put(0, ImageIO.read(new File(Images.class.getResource("/background/floor.png").getFile())));
+            background.put(1, ImageIO.read(new File(Images.class.getResource("/background/stone.png").getFile())));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     static void readGif(Image[] target, String path) {
