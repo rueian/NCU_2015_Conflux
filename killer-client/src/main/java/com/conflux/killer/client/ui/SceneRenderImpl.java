@@ -1,9 +1,9 @@
 package com.conflux.killer.client.ui;
 
 import com.conflux.killer.client.dom.ObjectCenter;
+import com.conflux.killer.core.map.SceneData;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class SceneRenderImpl implements SceneRender {
     private SceneData sceneData;

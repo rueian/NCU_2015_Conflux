@@ -8,6 +8,7 @@ import com.conflux.killer.client.message.MessageSenderImpl;
 import com.conflux.killer.client.tcp.TCPClient;
 import com.conflux.killer.client.tcp.TCPClientImpl;
 import com.conflux.killer.client.tcp.connection.Connector;
+import com.conflux.killer.core.map.SceneDataImpl;
 import com.conflux.killer.core.message.MessageConsumerThread;
 import com.conflux.killer.core.message.MessageQueue;
 import com.conflux.killer.core.message.MessageQueueImpl;

@@ -1,5 +1,7 @@
 package com.conflux.killer.server.cdc;
 
+import com.conflux.killer.core.map.SceneData;
+import com.conflux.killer.core.map.SceneDataImpl;
 import com.conflux.killer.core.message.Direction;
 import com.conflux.killer.core.message.Skill;
 import com.conflux.killer.server.message.MessageSender;
@@ -14,7 +16,7 @@ public class DataCenterImpl implements DataCenter {
     private MessageSender sender;
     private Queue< Point > initialPoints;
     private Map< Integer, Point > characters;
-    private Set< Point > blocks;
+    private SceneData sceneData;
 
     public DataCenterImpl( MessageSender sender ) {
         this.sender = sender;
@@ -23,11 +25,8 @@ public class DataCenterImpl implements DataCenter {
         this.initialPoints.addAll( Arrays.asList(
                 new Point( 1, 1 ), new Point( 1, 100 ), new Point( 100, 1 ), new Point( 100, 100 )
         ) );
-        this.blocks = new HashSet<>();
-        this.blocks.addAll( Arrays.asList(
-                new Point( 10, 10 ), new Point( 20, 20 )
-        ) );
-
+        this.sceneData = new SceneDataImpl();
+        this.sceneData.loadMap();
     }
 
     @Override
@@ -47,7 +46,7 @@ public class DataCenterImpl implements DataCenter {
         int newX = p.x + direction.getX();
         int newY = p.y + direction.getY();
 
-        if ( blocks.contains( new Point( newX - 1, newY - 1 ) ) ) {
+        if (this.sceneData.getView()[newX - 1][newY - 1] == 1) {
             return;
         }
 

@@ -1,4 +1,4 @@
-package com.conflux.killer.client.ui;
+package com.conflux.killer.core.map;
 
 public interface SceneData {
 
