@@ -17,6 +17,7 @@ public class DataCenterImpl implements DataCenter {
     private Queue< Point > initialPoints;
     private Map< Integer, Point > characters;
     private SceneData sceneData;
+    private boolean started = false;
 
     public DataCenterImpl( MessageSender sender ) {
         this.sender = sender;
@@ -31,9 +32,13 @@ public class DataCenterImpl implements DataCenter {
 
     @Override
     public void addCharacter( int clientId ) {
-        characters.put( clientId, initialPoints.poll() );
+        characters.put( clientId, null );
         sender.sendNewClientId( clientId );
         if ( characters.size() == 4 ) {
+            started = true;
+            for ( Map.Entry<Integer, Point> pair: characters.entrySet()) {
+                pair.setValue(initialPoints.poll());
+            }
             sender.gameStartWithAllCharacters( characters );
         } else {
             sender.currentPlayerNumbers( characters.size() );
@@ -93,9 +98,10 @@ public class DataCenterImpl implements DataCenter {
     public void removeCharacter( int clientId ) {
         characters.remove( clientId );
         sender.removeCharacter( clientId );
-
-        if (characters.size() == 1) {
+        sender.currentPlayerNumbers( characters.size() );
+        if (characters.size() == 1 && started) {
             isGaming = false;
+            started = false;
         }
     }
 }
