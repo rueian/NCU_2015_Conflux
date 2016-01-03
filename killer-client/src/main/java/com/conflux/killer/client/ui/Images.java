@@ -23,6 +23,8 @@ public class Images {
 
     public static Map<Integer, Image> background;
 
+    public static Image welcome;
+
     public static void load() {
         characters = new HashMap<>();
         attacks = new HashMap<>();
@@ -52,6 +54,8 @@ public class Images {
         try {
             background.put(0, ImageIO.read(new File(Images.class.getResource("/background/floor.png").getFile())));
             background.put(1, ImageIO.read(new File(Images.class.getResource("/background/stone.png").getFile())));
+
+            welcome = ImageIO.read(new File(Images.class.getResource("/background/welcome.png").getFile()));
         } catch (IOException e) {
             e.printStackTrace();
         }

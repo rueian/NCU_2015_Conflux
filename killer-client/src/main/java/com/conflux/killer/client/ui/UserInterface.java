@@ -41,6 +41,7 @@ public class UserInterface extends JFrame implements GameControlable {
         JLabel label = new JLabel( "The Killer" );
         label.setFont( new Font( "Arial", Font.BOLD, 50 ) );
         label.setBounds( 200, 50, 300, 60 );
+        label.setForeground(Color.white);
 
         final JTextField textField = new JTextField();
         textField.setBounds( 180, 250, 300, 60 );
@@ -84,7 +85,7 @@ public class UserInterface extends JFrame implements GameControlable {
         helpBtn.setBounds( 180, 320, 300, 60 );
         helpBtn.addActionListener( (e)-> JOptionPane.showMessageDialog( this, helpMessage ));
 
-        JPanel panel = new JPanel();
+        BackgrounPanel panel = new BackgrounPanel();
         panel.setSize(660, 660);
         panel.setLayout(null);
         panel.add(label);
