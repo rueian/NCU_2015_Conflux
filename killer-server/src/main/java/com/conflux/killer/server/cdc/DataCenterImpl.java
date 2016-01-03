@@ -51,7 +51,11 @@ public class DataCenterImpl implements DataCenter {
         int newX = p.x + direction.getX();
         int newY = p.y + direction.getY();
 
-        if (this.sceneData.getView()[newX - 1][newY - 1] == 1) {
+        int[][] map = this.sceneData.getView();
+
+        if ((newX - 1) < 0 || (newX - 1) >= map.length ||
+            (newY - 1) < 0 || (newY - 1)  >= map[newX - 1].length ||
+            map[newX - 1][newY - 1] == 1) {
             return;
         }
 
@@ -97,8 +101,10 @@ public class DataCenterImpl implements DataCenter {
     @Override
     public void removeCharacter( int clientId ) {
         characters.remove( clientId );
+        if (!started) {
+            sender.currentPlayerNumbers( characters.size() );
+        }
         sender.removeCharacter( clientId );
-        sender.currentPlayerNumbers( characters.size() );
         if (characters.size() == 1 && started) {
             isGaming = false;
             started = false;

@@ -18,7 +18,7 @@ public class Character {
         this.direction = Direction.DOWN;
         this.position = position;
 
-        this.sprite = new Sprite(null, Images.characters.get(clientId % 4).get(Direction.DOWN), 0, 1, 5, new Point(0, 0), new Point(0, 0), 1, Sprite.BA_DIE);
+        this.sprite = new Sprite(null, Images.characters.get(clientId % 4).get(Direction.DOWN), 0, 1, 2, new Point(0, 0), new Point(0, 0), 1, Sprite.BA_DIE);
     }
 
     public void setPosition( Point position ) {

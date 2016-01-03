@@ -1,5 +1,6 @@
 package com.conflux.killer.client.ui;
 
+import com.conflux.killer.client.dom.Character;
 import com.conflux.killer.client.dom.ObjectCenter;
 import com.conflux.killer.core.map.SceneData;
 
@@ -16,7 +17,11 @@ public class SceneRenderImpl implements SceneRender {
 
     @Override
     public void renderScene(Graphics g) {
-        Point p = objectCenter.getMe().position;
+        Character me = objectCenter.getMe();
+        if (me == null) {
+            return;
+        }
+        Point p = me.position;
 
         int[][] map = sceneData.getView();
 

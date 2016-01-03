@@ -19,7 +19,7 @@ public class Attack {
         this.type = type;
         this.position = position;
         this.direction = direction;
-        this.sprite = new Sprite(null, Images.attacks.get(type), 0, 1, 5, new Point(0, 0), new Point(0, 0), 1, Sprite.BA_DIE);
+        this.sprite = new Sprite(null, Images.attacks.get(type), 0, 1, 1, new Point(0, 0), new Point(0, 0), 1, Sprite.BA_DIE);
     }
 
     public void updateCounter() {
