@@ -25,8 +25,14 @@ public class SpriteRenderImpl implements SpriteRender {
     @Override
     public void renderSprite(Graphics g) {
         Character m = objectCenter.getMe();
+        if (m == null) {
+            return;
+        }
         for (Map.Entry<Integer, Character> pair: objectCenter.getAllCharacters().entrySet()) {
             Character c = pair.getValue();
+            if (c == null) {
+                continue;
+            }
             Sprite s = c.sprite;
             int xx = c.position.x - m.position.x + 5;
             int yy = c.position.y - m.position.y + 5;

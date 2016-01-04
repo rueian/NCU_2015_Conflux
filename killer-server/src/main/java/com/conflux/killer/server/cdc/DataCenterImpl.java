@@ -48,6 +48,9 @@ public class DataCenterImpl implements DataCenter {
     @Override
     public void updatePosition( int clientId, Direction direction ) {
         Point p = characters.get( clientId );
+        if (p == null) {
+            return;
+        }
         int newX = p.x + direction.getX();
         int newY = p.y + direction.getY();
 
@@ -71,6 +74,11 @@ public class DataCenterImpl implements DataCenter {
     public void fireAttack( int clientId, Skill skill, Direction direction ) {
 
         Point p = characters.get( clientId );
+
+        if (p == null) {
+            return;
+        }
+
         Point pp = new Point( p.x, p.y );
 
         switch ( skill ) {
