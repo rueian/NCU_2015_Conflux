@@ -116,10 +116,11 @@ public class UserInterface extends JFrame implements GameControlable {
     public void endGame() {
         renderThread.stopRenderThread();
         try {
-            Thread.sleep(500);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        this.removeKeyListener(keyListener);
         JPanel drawPanel = new JPanel();
         drawPanel.setSize(660, 660);
         JLabel label = new JLabel( "你死了" );
@@ -151,10 +152,11 @@ public class UserInterface extends JFrame implements GameControlable {
     public void winGame() {
         renderThread.stopRenderThread();
         try {
-            Thread.sleep(500);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        this.removeKeyListener(keyListener);
         JPanel drawPanel = new JPanel();
         drawPanel.setSize(660, 660);
         JLabel label = new JLabel( "恭喜你活到了最後" );
